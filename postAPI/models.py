@@ -1,14 +1,5 @@
 from django.db import models
 
-class User(models.Model):
-
-    # arbitrary max length for username
-    username = models.CharField(max_length=255, blank=False)
-
-    def __str__(self):
-        return "{}".format(self.username)
-
-
 class Post(models.Model):
 
     # auto_now_add sets value of timestamp_posted to be time of creation
@@ -25,7 +16,9 @@ class Post(models.Model):
     edited_text = models.TextField()
 
     # assumption: one author per post (else switch to ManyToManyRelationship)
-    author = models.ForeignKey(User, related_name='posts')
+    author = models.ForeignKey('auth.User',
+                               related_name='posts',
+                               on_delete=models.CASCADE)
 
     private = models.BooleanField(default=False)
 
