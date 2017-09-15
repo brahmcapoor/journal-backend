@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
-schema_view = get_schema_view(title='Journal API')
+schema_view = get_schema_view(title='Journal API',
+                            renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
 urlpatterns = [
-    url(r'^schema/$', schema_view),
+    url(r'^$', schema_view),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('postAPI.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),

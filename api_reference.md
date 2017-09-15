@@ -1,5 +1,7 @@
 # Journal API Reference
 ## V1.0
+
+[Reference](APIReference.png)
 ### Models
 
 * Sample post object:
@@ -27,19 +29,3 @@
 }
 ```
 
-### URLs
-* `posts/`
-	* Retrieves all posts and create a new post
-	* Supported methods: `GET`, `POST`
-* `dates/`
-	* Retrieves dates of all posts
-	* Supported methods: `GET`
-* `posts/<post_id>`
-	* Retrieve, update and delete a particular post with id `post_id`
-	* Supported methods: `GET`, `PUT`,  `DELETE`
-* `authors/`
-	* Retrieve all authors
-	* Supported methods: `GET`
-* `authors/<author_id>`
-	* Retrieve a particular post with id  `author_id`
-	* Supported methods: `GET`
