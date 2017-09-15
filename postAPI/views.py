@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User as Author
-from .serializers import AuthorSerializer
 from rest_framework import generics, permissions
 from .models import Post
-from .serializers import PostSerializer
+from .serializers import PostSerializer, PostDateSerializer, AuthorSerializer
 from .permissions import IsOwnerOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
@@ -12,6 +11,10 @@ class PostList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+class PostDateList(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostDateSerializer
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
@@ -26,5 +29,7 @@ class AuthorList(generics.ListAPIView):
 class AuthorDetail(generics.RetrieveAPIView):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+
 
 

@@ -15,6 +15,12 @@ class PostSerializer(serializers.ModelSerializer):
                   'author',
                   'private')
 
+class PostDateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ('timestamp_posted',)
+
 class AuthorSerializer(serializers.ModelSerializer):
 
     posts = serializers.PrimaryKeyRelatedField(many=True,
