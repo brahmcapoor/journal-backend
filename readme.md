@@ -17,3 +17,7 @@ $ python manage.py runserver                                      # runs server 
 ## Browsable API
 
 * Run server and navigate to `localhost:8000/posts` or any of the other URLs that support `GET` requests your browser for a visual browser of the database
+
+<p align='center'>
+<em> Built with 💻 in 🇸🇬 by Brahm Capoor </em>
+</p>
