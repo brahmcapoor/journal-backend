@@ -17,13 +17,32 @@ def api_root(request, format=None):
 
 
 class PostDateList(generics.ListAPIView):
+    """
+    get:
+        Return all post dates.
+    """
     queryset = Post.objects.all()
     serializer_class = PostDateSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
     """
-    automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
+    retrieve:
+        Return a post instance.
+
+    list:
+        Return all posts, ordered by post id.
+
+    create:
+        Create a new post.
+
+    delete:
+        Remove an existing post.
+
+    partial_update:
+        Update one or more fields on an existing post.
+
+    update:
+        Update a post.
     """
 
     queryset = Post.objects.all()
@@ -36,7 +55,11 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Automatically provides list and details
+    retrieve:
+        Return an author instance.
+
+    list:
+        Return all authors, ordered by author id.
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
