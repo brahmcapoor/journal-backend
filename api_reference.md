@@ -1,7 +1,7 @@
 # Journal API Reference
 ## V1.0
 
-[Reference](APIReference.png)
+![Reference](APIReference.png)
 ### Models
 
 * Sample post object:
