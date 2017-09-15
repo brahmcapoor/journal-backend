@@ -8,7 +8,8 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('timestamp_posted',
+        fields = ('id',
+                  'timestamp_posted',
                   'timestamp_edited',
                   'posted_text',
                   'edited_text',
@@ -28,4 +29,4 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('id', 'username', 'posts')
+        fields = ('id', 'username', 'email', 'posts')
