@@ -14,6 +14,10 @@ $ python manage.py createsuperuser                                # for auth pur
 $ python manage.py runserver                                      # runs server on port 8000
 ```
 
+## Documenation
+
+See `api_reference.md` for API details. Alternatively, run the server and navigate to `localhost:8000` for interactive documentation.
+
 ## Browsable API
 
 * Run server and navigate to `localhost:8000/posts` or any of the other URLs that support `GET` requests your browser for a visual browser of the database
