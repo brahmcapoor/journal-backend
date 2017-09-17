@@ -29,7 +29,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('id', 'username', 'email', 'posts', 'password',)
+        fields = ('id', 'username', 'email', 'posts', 'password')
         extra_kwargs = {
             'password': {'write_only': True}
         }

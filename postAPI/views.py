@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User as Author
-from rest_framework import generics, permissions, viewsets
+from rest_framework import generics, permissions, viewsets, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.authtoken.models import Token
 from .models import Post
 from .serializers import PostSerializer, PostDateSerializer, AuthorSerializer
 from .permissions import IsOwnerOrReadOnly, IsAdminOrTargetUser
@@ -75,6 +76,15 @@ class AuthorViewSet(viewsets.ModelViewSet):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+    def create(self, request, *args, **kwargs):  # <- here i forgot self
+        serializer = self.get_serializer(data = request.data)
+        serializer.is_valid(raise_exception = True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        token, created = Token.objects.get_or_create(user = serializer.instance)
+        return Response({'token': token.key}, status = status.HTTP_201_CREATED,
+                        headers = headers)
 
 
     def get_permissions(self):
