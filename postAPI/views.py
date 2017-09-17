@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from .models import Post
 from .serializers import PostSerializer, PostDateSerializer, AuthorSerializer
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsAdminOrTargetUser
 
 @api_view(['GET'])
 @permission_classes((IsOwnerOrReadOnly,))
@@ -53,15 +53,31 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author = self.request.user)
 
-class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
+class AuthorViewSet(viewsets.ModelViewSet):
     """
+    create:
+        Create an author instance
+
     retrieve:
         Return an author instance.
 
     list:
         Return all authors, ordered by author id.
+
+    delete:
+        Remove an existing author.
+
+    partial_update:
+        Update one or more fields on an existing author.
+
+    update:
+        Update an author.
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
+
+    def get_permissions(self):
+        return (permissions.AllowAny() if self.request.method == 'POST'
+                else IsAdminOrTargetUser()),
 

@@ -29,4 +29,25 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('id', 'username', 'email', 'posts')
+        fields = ('id', 'username', 'email', 'posts', 'password',)
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        author = Author(
+            email = validated_data['email'],
+            username = validated_data['username']
+        )
+        author.set_password(validated_data['password'])
+        author.save()
+        return author
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            if attr == 'password':
+                instance.set_password(value)
+            else:
+                setattr(instance, attr, value)
+        instance.save()
+        return instance
