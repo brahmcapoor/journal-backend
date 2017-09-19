@@ -21,7 +21,7 @@ class PostDateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('timestamp_posted',)
+        fields = ('id', 'story_date', 'posted_text')
 
 class AuthorSerializer(serializers.ModelSerializer):
 
