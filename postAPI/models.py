@@ -18,6 +18,9 @@ class Post(models.Model):
     # (anytime post.save() is called)
     timestamp_edited = models.DateTimeField(auto_now=True)
 
+    story_date = models.DateTimeField()
+
+
     # published content
     posted_text = models.TextField()
 

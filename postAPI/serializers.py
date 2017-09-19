@@ -11,6 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'timestamp_posted',
                   'timestamp_edited',
+                  'story_date',
                   'posted_text',
                   'edited_text',
                   'author',
